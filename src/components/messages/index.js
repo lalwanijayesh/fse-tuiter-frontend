@@ -15,7 +15,7 @@ const Messages = () => {
       <div className="ttr-messages">
           <div className="d-flex py-2 justify-content-between">
               <h1>Messages</h1>
-              <i className="far fa-2x fa-message-plus m-3 px-3"></i>
+              <NewMessage/>
           </div>
           <div className="list-group pe-4">
               {
