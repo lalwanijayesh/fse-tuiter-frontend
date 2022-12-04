@@ -16,6 +16,7 @@ import {Login} from "../profile/login";
 import Movies from "../movies";
 import MovieDetails from "../movies/details";
 import Signup from "../profile/signup";
+import { ChatScreen } from "../messages/chatscreen";
 
 function Tuiter () {
   return(
@@ -36,6 +37,7 @@ function Tuiter () {
               <Route path="/explore" element={<Explore/>}/>
               <Route path="/notifications" element={<Notifications/>}/>
               <Route path="/messages" element={<Messages/>}/>
+              <Route path="/chat" element={<ChatScreen/>}/>
               <Route path="/bookmarks" element={<Bookmarks/>}/>
               <Route path="/lists" element={<Lists/>}/>
               <Route path="/profile/*" element={<Profile/>}/>
