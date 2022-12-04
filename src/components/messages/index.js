@@ -2,6 +2,7 @@ import React from "react";
 import './messages.css';
 import Message from "./message";
 import NewMessage from "./new-message";
+import { ChatScreen } from "./chatscreen";
 
 const Messages = () => {
   // TODO - replace dummy data with API response
@@ -23,6 +24,9 @@ const Messages = () => {
                       <Message key={message.id} message={message}/>)
               }
           </div>
+          {/* <div>
+            <ChatScreen/>
+          </div> */}
       </div>
   );
 };
