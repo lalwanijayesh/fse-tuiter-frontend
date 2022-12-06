@@ -1,10 +1,10 @@
 import {useNavigate,useLocation} from "react-router-dom";
-import {useState} from "react";
+import React, { useEffect, useState } from 'react';
 import './chat.css';
-import React from "react";
 import * as service from "../../services/auth-service";
 
 import * as messageService from "../../services/messages-service";
+import * as userService from "../../services/users-service";
 import { ChatMessage } from "./chat-message";
 
 export const ChatScreen = () => {
@@ -12,9 +12,12 @@ export const ChatScreen = () => {
     const {state} = useLocation();
     const [msgs, setMsgs] = useState(state.msg) 
     const [user, setUsr] = useState(state.user)
-    const [otherUser, setOtherUsr] = useState(state.otherUser)
+    const [otherUserId, setOtherUsr] = useState(state.otherUserId)
+    const [otherUsername, setOtherUsrname] = useState(state.otherUsername)
+
      
 
+    
     const [newMessage, setMessage] = useState('');
     const handleChange = event => {
         setMessage(event.target.value);
@@ -29,7 +32,7 @@ export const ChatScreen = () => {
         // TODO: add message
 
         // refresh messages
-        messageService.findAllMessagesBetweenUsers(user, otherUser)
+        messageService.findAllMessagesBetweenUsers(user, otherUserId)
             .then((ms) => {
                 setMsgs(ms)
             })
@@ -41,17 +44,9 @@ export const ChatScreen = () => {
     return (
         <div>
             <div className="d-flex py-2 justify-content-between">
-              <h1>Messages</h1>
+              <h1>Messages with @{otherUsername}</h1>
             </div>
-            <div className="row">
-                <div className="col-2">
-                    <button className="btn btn-primary" onClick={navme}>Back</button>
-                </div>
-                <div className="col-2">
-                    {/* give username here */}
-                    <h2>@{otherUser}</h2>
-                </div>
-            </div>
+            <button className="btn btn-primary back-btn" onClick={navme}>Back</button>
             
             <div className="mesgs border border-secondary rounded">
             
