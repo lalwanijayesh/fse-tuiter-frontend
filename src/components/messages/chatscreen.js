@@ -54,7 +54,7 @@ export const ChatScreen = () => {
                     {/* map of messages */}
                     {/* pass the loggedInUser */}
                     {msgs && msgs.map(message =>
-                      <ChatMessage key={message.id} message={message} loginUser = {user}/>)}
+                     <><ChatMessage key={message.id} message={message} loginUser = {user}/></> )}
                 </div>
                 <div className="type_msg">
                     <div className="input_msg_write">

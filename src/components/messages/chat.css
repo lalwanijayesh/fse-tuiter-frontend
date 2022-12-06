@@ -59,6 +59,10 @@ img{ max-width:100%;}
 
 .active_chat{ background:#ebebeb;}
 
+.incoming_msg{
+  margin:20px 0 20px;
+}
+
 .incoming_msg_img {
   display: inline-block;
   width: 6%;
@@ -80,6 +84,27 @@ img{ max-width:100%;}
 }
 .back-btn{
 margin-bottom: 10px;
+}
+
+.msgs-list{
+  position: relative;
+}
+.delete-msg{
+    position: absolute;
+    top: 0px;
+    right: 0px;
+}
+.cust-div1{
+  display:inline-block;
+  width: 60%;
+}
+.cust-div2{
+  display:inline-block;
+  width: 20%;
+}
+.cust-div3{
+  display:inline-block;
+  width: 20%;
 }
 .time_date {
   color: #747474;
@@ -103,7 +128,7 @@ margin-bottom: 10px;
   padding: 5px 10px 5px 12px;
   width:100%;
 }
-.outgoing_msg{ overflow:hidden; margin:26px 0 26px;}
+.outgoing_msg{ overflow:hidden; margin:20px 0 20px;}
 .sent_msg {
   float: right;
   width: 46%;

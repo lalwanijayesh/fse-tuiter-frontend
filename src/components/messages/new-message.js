@@ -29,7 +29,7 @@ function NewMessage() {
     useEffect(findAllUsers, []);
     return (
         <div>
-            <i className="far fa-2x fa-message-plus m-3 px-3" onClick={handleShow}></i>
+            <i className="far fa-2x fa-message-plus m-3 px-2" onClick={handleShow}></i>
             <Modal show={show} onHide={handleClose} scrollable={true}>
                 <Modal.Header closeButton>
                     <Modal.Title>New Message</Modal.Title>

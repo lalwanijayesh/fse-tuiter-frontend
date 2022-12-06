@@ -3,6 +3,7 @@ import './messages.css';
 import Message from "./message";
 import NewMessage from "./new-message";
 import { ChatScreen } from "./chatscreen";
+import StarredMessage from "./starred-messages";
 
 const Messages = () => {
   // TODO - replace dummy data with API response
@@ -14,9 +15,18 @@ const Messages = () => {
   ];
   return (
       <div className="ttr-messages">
-          <div className="d-flex py-2 justify-content-between">
-              <h1>Messages</h1>
-              <NewMessage/>
+          <div className="d-flex py-3 row">
+            <div className=" cust-div1 float-left">
+                <h1>Messages</h1>
+
+            </div>
+            <div className="cust-div2 float-left">
+            <StarredMessage/>
+            </div>
+            <div className="cust-div3 float-left">
+            <NewMessage/>
+            </div>
+              
           </div>
           <div className="list-group pe-4">
               {
