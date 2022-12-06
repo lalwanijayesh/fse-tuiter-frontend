@@ -7,7 +7,10 @@ export const Login = () => {
     const navigate = useNavigate()
     const login = () =>
         service.login(loginUser)
-            .then((user) => navigate('/profile/mytuits'))
+            .then((user) => {
+                localStorage.setItem("userId", user._id);
+                navigate('/profile/mytuits');
+            })
             .catch(e => alert(e));
     return (
         <div>
