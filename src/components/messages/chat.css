@@ -78,6 +78,9 @@ img{ max-width:100%;}
   padding: 5px 10px 5px 12px;
   width: 100%;
 }
+.back-btn{
+margin-bottom: 10px;
+}
 .time_date {
   color: #747474;
   display: block;
