@@ -2,22 +2,35 @@ import React, {useEffect, useState} from "react";
 import './messages.css';
 import Message from "./message";
 import NewMessage from "./new-message";
-import { ChatScreen } from "./chatscreen";
 import StarredMessage from "./starred-messages";
+import {useNavigate} from "react-router-dom";
+import * as service from "../../services/messages-service";
 
 const Messages = () => {
+  const navigate = useNavigate();
   const [loggedInUserId, setLoggedInUserId] = useState('');
 
-  // TODO - replace dummy data with API response
-  const messages = [
-      {id: 1, user: 'alice', 'message': 'Hello, how\'s it going?', date: 'November 22'},
-      {id: 2, user: 'bob', 'message': 'This is the best tv show ever.', date: 'November 10'},
-      {id: 3, user: 'charlie', 'message': 'I will see you tonight then!', date: 'August 6'},
-      {id: 4, user: 'dan', 'message': 'What do you think?', date: 'January 19'},
-  ];
+  const [messages, setMessages] = useState([]);
 
-  const getLoggedInUser = () =>
-      setLoggedInUserId(localStorage.getItem('userId'));
+  const getLatestMessages = (uid) =>
+      service.findLatestMessagesForUser(uid)
+          .then(result => {
+              for (let i = 0; i < result.length; i++) {
+                  result[i].user = result[i].from._id === loggedInUserId ? result[i].to : result[i].from;
+              }
+              result.sort((a, b) => a.sentOn - b.sentOn);
+              setMessages(result);
+          });
+
+  const getLoggedInUser = () => {
+      const userId = sessionStorage.getItem('userId');
+      if (userId && userId !== '') {
+          setLoggedInUserId(userId);
+          getLatestMessages(userId);
+      } else {
+          navigate('/login');
+      }
+  }
 
   useEffect(getLoggedInUser, [loggedInUserId]);
 
