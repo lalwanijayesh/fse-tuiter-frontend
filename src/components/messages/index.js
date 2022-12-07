@@ -4,8 +4,10 @@ import Message from "./message";
 import NewMessage from "./new-message";
 import { ChatScreen } from "./chatscreen";
 import StarredMessage from "./starred-messages";
+import {useNavigate} from "react-router-dom";
 
 const Messages = () => {
+  const navigate = useNavigate();
   const [loggedInUserId, setLoggedInUserId] = useState('');
 
   // TODO - replace dummy data with API response
@@ -16,8 +18,14 @@ const Messages = () => {
       {id: 4, user: 'dan', 'message': 'What do you think?', date: 'January 19'},
   ];
 
-  const getLoggedInUser = () =>
-      setLoggedInUserId(localStorage.getItem('userId'));
+  const getLoggedInUser = () => {
+      const userId = sessionStorage.getItem('userId');
+      if (userId && userId !== '') {
+          setLoggedInUserId(userId);
+      } else {
+          navigate('/login');
+      }
+  }
 
   useEffect(getLoggedInUser, [loggedInUserId]);
 

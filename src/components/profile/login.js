@@ -8,7 +8,7 @@ export const Login = () => {
     const login = () =>
         service.login(loginUser)
             .then((user) => {
-                localStorage.setItem("userId", user._id);
+                sessionStorage.setItem("userId", user._id);
                 navigate('/profile/mytuits');
             })
             .catch(e => alert(e));
