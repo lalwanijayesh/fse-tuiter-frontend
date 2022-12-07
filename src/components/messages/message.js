@@ -53,10 +53,10 @@ const Message = ({message}) => {
           <img src={`../images/${message.user}.jpg`}
                className="ttr-user-avatar-logo rounded-circle"/>
           <div className="mx-2">
-              <h5>{message.user}@{message.user}</h5>
+              <h5>{message.user.username}@{message.user.username}</h5>
               <span>{message.message}</span>
           </div>
-          <span className="ms-auto">{message.date}</span>
+          <span className="ms-auto">{message.sentOn}</span>
 
         </div>
     );

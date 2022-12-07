@@ -5,6 +5,10 @@ const BASE_URL = process.env.REACT_APP_BASE_URL;
 
 // const MESSAGE_API = `${BASE_URL}/users`;
 
+export const findLatestMessagesForUser = (uid) =>
+    axios.get(`${BASE_URL}/users/${uid}/chats`)
+        .then(response => response.data);
+
 export const findAllMessagesSent = (uid) =>
     axios.get(`${BASE_URL}/users/${uid}/sent-messages`)
         .then(response => response.data);
@@ -19,6 +23,7 @@ export const sendMessage = (uid, ruid, msg) =>
             .then(response => response.data);
 
 const service = {
+    findLatestMessagesForUser,
     findAllMessagesBetweenUsers,
     findAllMessagesSent,
     sendMessage
