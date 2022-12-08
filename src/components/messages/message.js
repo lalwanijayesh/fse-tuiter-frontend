@@ -30,7 +30,7 @@ const Message = ({message}) => {
         // give loggedin userid or other userid to goToMessages function
         <div className="list-group-item ttr-message d-flex" onClick={() => goToMessages(message.user._id, message.user.username)}>
           
-          <img src={`../images/${message.user}.jpg`}
+          <img src={`../images/${message.user.username}.jpg`}
                className="ttr-user-avatar-logo rounded-circle"/>
           <div className="mx-2">
               <h5>{message.user.username}@{message.user.username}</h5>

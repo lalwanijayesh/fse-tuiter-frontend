@@ -29,7 +29,7 @@ export const MessageList = ({messages}) => {
             // need to add current logged in user
               <div key={msg._id} className="list-group-item ">
 
-                  {/* <img src={`../images/${user.username}.jpg`}
+                  {/* <img src={`../images/chaplin.jpg`}
                        className="ttr-user-avatar-logo rounded-circle"/> */}
                   <div className="mx-2 msgs-list">
                     <h4 className="m-1">{msg.message.message}</h4>

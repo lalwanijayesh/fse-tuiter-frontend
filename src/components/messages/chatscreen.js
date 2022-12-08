@@ -53,8 +53,6 @@ export const ChatScreen = () => {
             <div className="mesgs border border-secondary rounded">
             
                 <div className="msg_history">
-                    {/* map of messages */}
-                    {/* pass the loggedInUser */}
                     {msgs && msgs.map(message =>
                      <><ChatMessage key={message.id} message={message} loginUser = {user}/></> )}
                 </div>

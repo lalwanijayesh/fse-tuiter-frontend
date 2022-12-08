@@ -23,43 +23,38 @@ export const ChatMessage = ({message, loginUser}) => {
         service.userStarsMessage(currUser, message._id)
         .then()
     }
-    const updateCurrMessage = (mid, message) => {
-        // console.log(mid)
-        // console.log(message)
-        messageService.updateMessage(mid, {message})
+    const updateCurrMessage = (uid, mid, message) => {
+        messageService.updateMessage(uid, mid, {message})
         .then((m) => {
 
-            if (m.acknowledged === true) {
                 setIsEdit(false)
-                // todo: code for updating the message
-                
+                // updating the message
+                setMsg(m)
                 //update the input text
                 setMsgVal(message)
 
-            }
             
         })
     }
 
-    //   console.log(message)
     const isLoggedInUser = loginUser == message.from._id;
       
     return (
         
         <>
             {!isLoggedInUser && 
-                <div class="incoming_msg">
-                            <div class="incoming_msg_img"> 
-                                <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"/> 
+                <div className="incoming_msg">
+                            <div className="incoming_msg_img "> 
+                                <img className="rounded-circle" src={`../images/${message.from.username}.jpg`} alt="sunil"/> 
                             </div>
-                            <div class="received_msg">
-                                <div class="received_withd_msg" onMouseEnter={() => setIsShown(true)} onMouseLeave={() => setIsShown(false)}>
+                            <div className="received_msg">
+                                <div className="received_withd_msg" onMouseEnter={() => setIsShown(true)} onMouseLeave={() => setIsShown(false)}>
                                     <p>{msg.message}</p>
                                     
-                                    <div class="d-flex">
-                                        <div className="mr-auto p-2"><span class="time_date">{formatDate(msg.sentOn)}</span></div>
+                                    <div className="d-flex">
+                                        <div className="mr-auto p-2"><span className="time_date">{formatDate(msg.sentOn)}</span></div>
                                         {isShown && (<>
-                                        <div className="p-2" onClick={() => starMessage(msg, loginUser)}><span><i class="fa fa-star" aria-hidden="true"></i></span></div>
+                                        <div className="p-2" onClick={() => starMessage(msg, loginUser)}><span><i className="fa fa-star" aria-hidden="true"></i></span></div>
                                         </>)}
                                     
                                     </div>
@@ -69,30 +64,31 @@ export const ChatMessage = ({message, loginUser}) => {
             }
             {
              isLoggedInUser  && 
-                <div class="outgoing_msg">
-                            <div class="sent_msg" onMouseEnter={() => setIsShown(true)} onMouseLeave={() => setIsShown(false)}>
-                            {!isEdit && (<span class="time_date"><p>{msg.message}</p></span>)}
-                            {isEdit && (<input type="text" class="form-control" 
+                <div className="outgoing_msg">
+                            <div className="sent_msg" onMouseEnter={() => setIsShown(true)} onMouseLeave={() => setIsShown(false)}>
+                            {!isEdit && (<span className="time_date"><p>{msg.message}</p></span>)}
+                            {isEdit && (<input type="text" className="form-control" 
                             onChange={(handleChange)}
                             value={msgVal} 
                             />)}
                                 
-                                <div class="d-flex">
+                                <div className="d-flex">
                                     <div className="mr-auto p-2">
-                                        <span class="time_date">{formatDate(msg.sentOn)}</span>
+                                        {msg.edited && (<span className="edit-flag1">Edited</span>)}
+                                        <span className="time_date">{formatDate(msg.sentOn)}</span>
                                     </div>
-                                    {isShown && (<><div className="p-2" onClick={() => starMessage(msg, loginUser)}><span><i class="fa fa-star" aria-hidden="true"></i></span></div>
+                                    {isShown && (<><div className="p-2" onClick={() => starMessage(msg, loginUser)}><span><i className="fa fa-star" aria-hidden="true"></i></span></div>
                                     {!isEdit && (
                                         <div className="p-2" onClick={() => setIsEdit(true)}>
-                                            <span><i class="fa fa-pencil" aria-hidden="true"></i>
+                                            <span><i className="fa fa-pencil" aria-hidden="true"></i>
                                             </span>
                                             
                                         </div>)}
                                         {isEdit && (
                                         <div className="p-2" >
-                                            <span onClick={() => updateCurrMessage(msg._id, msgVal)}><i class="fa fa-check edit-sp" aria-hidden="true"></i>  
+                                            <span onClick={() => updateCurrMessage(loginUser, msg._id, msgVal)}><i className="fa fa-check edit-sp" aria-hidden="true"></i>  
                                             </span>
-                                            <span onClick={() => setIsEdit(false)}><i class="fa fa-close" aria-hidden="true"></i>
+                                            <span onClick={() => setIsEdit(false)}><i className="fa fa-close" aria-hidden="true"></i>
                                             </span>
                                             
                                         </div>)}    

@@ -56,9 +56,6 @@ const Messages = () => {
                       <Message key={message.id} message={message}/>)
               }
           </div>
-          {/* <div>
-            <ChatScreen/>
-          </div> */}
       </div>
   );
 };

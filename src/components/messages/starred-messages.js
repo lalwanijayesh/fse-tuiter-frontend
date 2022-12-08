@@ -18,7 +18,6 @@ function StarredMessage({user}) {
     starredService.findAllStarredMessagesByUser(loggedinUser)
             .then(ms => {
                 setMsgs(ms)
-                // alert(JSON.stringify(ms))
             });
 
     useEffect(findAllStarredMessagesByUser, []);

@@ -115,6 +115,14 @@ margin-bottom: 10px;
   font-size: 12px;
   margin: 8px 0 0;
 }
+
+.edit-flag1 {
+  color: #747474;
+  display: block;
+  font-size: 8px;
+  margin: 8px 0 0;
+}
+
 .received_withd_msg { width: 57%;}
 .mesgs {
   float: left;
