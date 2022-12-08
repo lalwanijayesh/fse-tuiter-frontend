@@ -2,11 +2,12 @@ import React, { useEffect, useState } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import {UserList} from "../profile/user-list";
 import * as service from "../../services/users-service";
-import * as messageService from "../../services/messages-service";
+import * as starredService from "../../services/starred-service";
 import './messages.css'
 import { MessageList } from './message-list';
 
-function StarredMessage() {
+function StarredMessage({user}) {
+    const loggedinUser = user
     const [show, setShow] = useState(false);
     const [msgs, setMsgs] = useState([]);
 
@@ -14,8 +15,7 @@ function StarredMessage() {
     const handleShow = () => setShow(true);
 
     const findAllStarredMessagesByUser = () =>
-    // need to add starred  message service code
-        messageService.findAllMessagesSent('63411e6f8f69a59f7b47324f')
+    starredService.findAllStarredMessagesByUser(loggedinUser)
             .then(ms => {
                 setMsgs(ms)
                 // alert(JSON.stringify(ms))

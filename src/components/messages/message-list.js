@@ -20,10 +20,10 @@ export const MessageList = ({messages}) => {
                   {/* <img src={`../images/${user.username}.jpg`}
                        className="ttr-user-avatar-logo rounded-circle"/> */}
                   <div className="mx-2 msgs-list">
-                    <h4 className="m-1">{msg.message}</h4>
+                    <h4 className="m-1">{msg.message.message}</h4>
                     <div className="delete-msg"><i class="fa fa-close"></i></div>
-                    <span><small>@{msg.from}</small></span>
-                    <span className="time_date">{formatDate(msg.sentOn)}</span>
+                    <span><small>@{msg.message.from.username}</small></span>
+                    <span className="time_date">{formatDate(msg.message.sentOn)}</span>
                   </div>
               </div>
           )

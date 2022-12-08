@@ -42,7 +42,7 @@ const Messages = () => {
 
             </div>
             <div className="cust-div2 float-left">
-            <StarredMessage/>
+                {loggedInUserId && (<StarredMessage user={loggedInUserId}/>)}
             </div>
             <div className="cust-div3 float-left">
             <NewMessage/>
