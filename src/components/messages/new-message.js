@@ -16,8 +16,10 @@ function NewMessage({currUser}) {
     const findAllUsers = () =>
         service.findAllUsers()
             .then(users => {
-                setUsers(users);
-                setFilteredUsers(users);
+                const userExcludinMe = users.filter(user =>
+                    user._id !== currUser)
+                setUsers(userExcludinMe);
+                setFilteredUsers(userExcludinMe);
             });
 
     const filterBySearch = (event) => {
