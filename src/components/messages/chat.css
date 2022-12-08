@@ -63,6 +63,9 @@ img{ max-width:100%;}
   margin:20px 0 20px;
 }
 
+.edit-sp{
+  margin-right: 5px;
+}
 .incoming_msg_img {
   display: inline-block;
   width: 6%;
@@ -112,6 +115,14 @@ margin-bottom: 10px;
   font-size: 12px;
   margin: 8px 0 0;
 }
+
+.edit-flag1 {
+  color: #747474;
+  display: block;
+  font-size: 8px;
+  margin: 8px 0 0;
+}
+
 .received_withd_msg { width: 57%;}
 .mesgs {
   float: left;

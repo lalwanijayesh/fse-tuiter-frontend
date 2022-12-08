@@ -2,15 +2,40 @@ import {useNavigate} from "react-router-dom";
 import {useState} from "react";
 import './chat.css';
 import React from "react";
-import * as service from "../../services/auth-service";
+import * as service from "../../services/starred-service";
+import * as messageService from "../../services/messages-service";
 
 export const ChatMessage = ({message, loginUser}) => {
     const [isShown, setIsShown] = useState(false);
     const [isEdit, setIsEdit] = useState(false);
+    const [msg, setMsg] = useState(message);
+
+    const [msgVal, setMsgVal] = useState(msg.message);
+    const handleChange = event => {
+        setMsgVal(event.target.value);
+      };
+
     const formatDate = (dateString) => {
         const options = {month: "long", day: "numeric", hour: 'numeric', minute: 'numeric', hour12: true}
         return new Date(dateString).toLocaleDateString(undefined, options)
       }
+    const starMessage = (message, currUser) => {
+        service.userStarsMessage(currUser, message._id)
+        .then()
+    }
+    const updateCurrMessage = (uid, mid, message) => {
+        messageService.updateMessage(uid, mid, {message})
+        .then((m) => {
+
+                setIsEdit(false)
+                // updating the message
+                setMsg(m)
+                //update the input text
+                setMsgVal(message)
+
+            
+        })
+    }
 
     const isLoggedInUser = loginUser == message.from._id;
       
@@ -18,18 +43,18 @@ export const ChatMessage = ({message, loginUser}) => {
         
         <>
             {!isLoggedInUser && 
-                <div class="incoming_msg">
-                            <div class="incoming_msg_img"> 
-                                <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"/> 
+                <div className="incoming_msg">
+                            <div className="incoming_msg_img "> 
+                                <img className="rounded-circle" src={`../images/${message.from.username}.jpg`} alt="sunil"/> 
                             </div>
-                            <div class="received_msg">
-                                <div class="received_withd_msg" onMouseEnter={() => setIsShown(true)} onMouseLeave={() => setIsShown(false)}>
-                                    <p>{message.message}</p>
+                            <div className="received_msg">
+                                <div className="received_withd_msg" onMouseEnter={() => setIsShown(true)} onMouseLeave={() => setIsShown(false)}>
+                                    <p>{msg.message}</p>
                                     
-                                    <div class="d-flex">
-                                        <div className="mr-auto p-2"><span class="time_date">{formatDate(message.sentOn)}</span></div>
+                                    <div className="d-flex">
+                                        <div className="mr-auto p-2"><span className="time_date">{formatDate(msg.sentOn)}</span></div>
                                         {isShown && (<>
-                                        <div className="p-2"><span><i class="fa fa-star" aria-hidden="true"></i></span></div>
+                                        <div className="p-2" onClick={() => starMessage(msg, loginUser)}><span><i className="fa fa-star" aria-hidden="true"></i></span></div>
                                         </>)}
                                     
                                     </div>
@@ -39,25 +64,31 @@ export const ChatMessage = ({message, loginUser}) => {
             }
             {
              isLoggedInUser  && 
-                <div class="outgoing_msg">
-                            <div class="sent_msg" onMouseEnter={() => setIsShown(true)} onMouseLeave={() => setIsShown(false)}>
-                            {!isEdit && (<span class="time_date"><p>{message.message}</p></span>)}
-                            {isEdit && (<input type="text" class="form-control" placeholder={message.message}/>)}
+                <div className="outgoing_msg">
+                            <div className="sent_msg" onMouseEnter={() => setIsShown(true)} onMouseLeave={() => setIsShown(false)}>
+                            {!isEdit && (<span className="time_date"><p>{msg.message}</p></span>)}
+                            {isEdit && (<input type="text" className="form-control" 
+                            onChange={(handleChange)}
+                            value={msgVal} 
+                            />)}
                                 
-                                <div class="d-flex">
+                                <div className="d-flex">
                                     <div className="mr-auto p-2">
-                                        <span class="time_date">{formatDate(message.sentOn)}</span>
+                                        {msg.edited && (<span className="edit-flag1">Edited</span>)}
+                                        <span className="time_date">{formatDate(msg.sentOn)}</span>
                                     </div>
-                                    {isShown && (<><div className="p-2"><span><i class="fa fa-star" aria-hidden="true"></i></span></div>
+                                    {isShown && (<><div className="p-2" onClick={() => starMessage(msg, loginUser)}><span><i className="fa fa-star" aria-hidden="true"></i></span></div>
                                     {!isEdit && (
                                         <div className="p-2" onClick={() => setIsEdit(true)}>
-                                            <span><i class="fa fa-pencil" aria-hidden="true"></i>
+                                            <span><i className="fa fa-pencil" aria-hidden="true"></i>
                                             </span>
                                             
                                         </div>)}
                                         {isEdit && (
-                                        <div className="p-2" onClick={() => setIsEdit(false)}>
-                                            <span><i class="fa fa-close" aria-hidden="true"></i>
+                                        <div className="p-2" >
+                                            <span onClick={() => updateCurrMessage(loginUser, msg._id, msgVal)}><i className="fa fa-check edit-sp" aria-hidden="true"></i>  
+                                            </span>
+                                            <span onClick={() => setIsEdit(false)}><i className="fa fa-close" aria-hidden="true"></i>
                                             </span>
                                             
                                         </div>)}    

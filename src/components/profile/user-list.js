@@ -2,7 +2,7 @@ import React from "react";
 import {HashRouter, Link, Route, Routes, useNavigate, useLocation} from "react-router-dom";
 import * as service from "../../services/messages-service";
 
-export const UserList = ({users}) => {
+export const UserList = ({currUser,users}) => {
   const navigate = useNavigate()
   const goToMessages = (loggedInUser, otherUser, otherUsername) => {
         
@@ -27,7 +27,7 @@ export const UserList = ({users}) => {
           return (
             // need to add current logged in user
               <div key={user._id} onClick={() => 
-                goToMessages('63411e798f69a59f7b473251', user._id, user.username)
+                goToMessages(currUser, user._id, user.username)
               } className="list-group-item ttr-message d-flex">
 
                   <img src={`../images/${user.username}.jpg`}

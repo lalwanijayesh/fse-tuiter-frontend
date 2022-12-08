@@ -12,6 +12,7 @@ const Messages = () => {
 
   const [messages, setMessages] = useState([]);
 
+  
   const getLatestMessages = (uid) =>
       service.findLatestMessagesForUser(uid)
           .then(result => {
@@ -42,10 +43,10 @@ const Messages = () => {
 
             </div>
             <div className="cust-div2 float-left">
-            <StarredMessage/>
+                {loggedInUserId && (<StarredMessage user={loggedInUserId}/>)}
             </div>
             <div className="cust-div3 float-left">
-            <NewMessage/>
+                {loggedInUserId && (<NewMessage currUser={loggedInUserId}/>)}
             </div>
               
           </div>
@@ -55,9 +56,6 @@ const Messages = () => {
                       <Message key={message.id} message={message}/>)
               }
           </div>
-          {/* <div>
-            <ChatScreen/>
-          </div> */}
       </div>
   );
 };
