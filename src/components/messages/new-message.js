@@ -4,7 +4,8 @@ import {UserList} from "../profile/user-list";
 import * as service from "../../services/users-service";
 import './messages.css'
 
-function NewMessage() {
+function NewMessage({currUser}) {
+    const logInUser = currUser
     const [show, setShow] = useState(false);
     const [users, setUsers] = useState([]);
     const [filteredUsers, setFilteredUsers] = useState([]);
@@ -42,7 +43,7 @@ function NewMessage() {
                         <input type="text" className="form-control" placeholder="Search here"
                                onChange={filterBySearch}/>
                     </div>
-                    <UserList users={filteredUsers}/>
+                    <UserList currUser={logInUser} users={filteredUsers}/>
                 </Modal.Body>
             </Modal>
         </div>

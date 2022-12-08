@@ -6,7 +6,7 @@ const BASE_URL = process.env.REACT_APP_BASE_URL;
 // const MESSAGE_API = `${BASE_URL}/users`;
 ///users/:uid/stars/:mid
 export const findAllStarredMessagesByUser = (uid) =>
-    axios.get(`${BASE_URL}/users/${uid}/stars`)
+    axios.get(`${BASE_URL}/starred/${uid}`)
         .then(response => response.data);
 
 export const userStarsMessage = (uid, mid) =>

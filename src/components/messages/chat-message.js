@@ -12,6 +12,7 @@ export const ChatMessage = ({message, loginUser}) => {
         return new Date(dateString).toLocaleDateString(undefined, options)
       }
 
+      console.log(message)
     const isLoggedInUser = loginUser == message.from._id;
       
     return (

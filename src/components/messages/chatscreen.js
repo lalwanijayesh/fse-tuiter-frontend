@@ -30,11 +30,12 @@ export const ChatScreen = () => {
     
     const sendMessage = (message) => {
         messageService.sendMessage(user, otherUser, {message})
-            .then(() => {
+            .then(msg => {
                 // refresh messages
                 messageService.findAllMessagesBetweenUsers(user, otherUser)
                     .then((ms) => {
                         setMsgs(ms)
+                        setMessage('')
                     })
                     .catch(e => console.log(e));
             })

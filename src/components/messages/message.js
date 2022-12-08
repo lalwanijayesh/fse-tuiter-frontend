@@ -4,7 +4,13 @@ import * as service from "../../services/messages-service";
 
 const Message = ({message}) => {
     const navigate = useNavigate();
-    const goToMessages = (otherUser) => {
+
+    const formatDate = (dateString) => {
+      const options = {month: "long", day: "numeric", hour: 'numeric', minute: 'numeric', hour12: true}
+      return new Date(dateString).toLocaleDateString(undefined, options)
+    }
+
+    const goToMessages = (otherUser, otherUsername) => {
         const loggedInUser = sessionStorage.getItem('userId');
         service.findAllMessagesBetweenUsers(loggedInUser, otherUser)
             .then((ms) => {
@@ -12,7 +18,8 @@ const Message = ({message}) => {
                     state: {
                       msg: ms,
                       user: loggedInUser,
-                      otherUser: otherUser
+                      otherUser: otherUser,
+                      otherUsername: otherUsername
                     }
                   })
             })
@@ -21,7 +28,7 @@ const Message = ({message}) => {
     } 
     return (
         // give loggedin userid or other userid to goToMessages function
-        <div className="list-group-item ttr-message d-flex" onClick={() => goToMessages(message.user._id)}>
+        <div className="list-group-item ttr-message d-flex" onClick={() => goToMessages(message.user._id, message.user.username)}>
           
           <img src={`../images/${message.user}.jpg`}
                className="ttr-user-avatar-logo rounded-circle"/>
@@ -29,7 +36,7 @@ const Message = ({message}) => {
               <h5>{message.user.username}@{message.user.username}</h5>
               <span>{message.message}</span>
           </div>
-          <span className="ms-auto">{message.sentOn}</span>
+          <span className="ms-auto">{formatDate(message.sentOn)}</span>
 
         </div>
     );

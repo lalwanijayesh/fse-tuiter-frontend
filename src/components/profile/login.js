@@ -9,6 +9,7 @@ export const Login = () => {
         service.login(loginUser)
             .then((user) => {
                 sessionStorage.setItem("userId", user._id);
+                sessionStorage.setItem("username", user.username);
                 navigate('/profile/mytuits');
             })
             .catch(e => alert(e));
