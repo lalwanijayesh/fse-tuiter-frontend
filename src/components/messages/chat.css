@@ -63,6 +63,9 @@ img{ max-width:100%;}
   margin:20px 0 20px;
 }
 
+.edit-sp{
+  margin-right: 5px;
+}
 .incoming_msg_img {
   display: inline-block;
   width: 6%;

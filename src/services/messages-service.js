@@ -22,11 +22,16 @@ export const sendMessage = (uid, ruid, msg) =>
         axios.post(`${BASE_URL}/users/${uid}/messages/${ruid}`, msg)
             .then(response => response.data);
 
+export const updateMessage = (mid, msg) =>
+            axios.put(`${BASE_URL}/messages/${mid}`, msg)
+                .then(response => response.data);
+
 const service = {
     findLatestMessagesForUser,
     findAllMessagesBetweenUsers,
     findAllMessagesSent,
-    sendMessage
+    sendMessage,
+    updateMessage
 }
 
 export default service;
