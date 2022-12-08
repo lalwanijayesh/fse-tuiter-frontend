@@ -12,7 +12,7 @@ export const ChatScreen = () => {
     const {state} = useLocation();
     const [msgs, setMsgs] = useState(state.msg) 
     const [user, setUsr] = useState(state.user)
-    const [otherUserId, setOtherUsr] = useState(state.otherUserId)
+    const [otherUser, setOtherUsr] = useState(state.otherUser)
     const [otherUsername, setOtherUsrname] = useState(state.otherUsername)
 
      
@@ -28,16 +28,17 @@ export const ChatScreen = () => {
         navigate('/messages')
     }
     
-    const sendMessage = (msg) => {
-        // TODO: add message
-
-        // refresh messages
-        messageService.findAllMessagesBetweenUsers(user, otherUserId)
-            .then((ms) => {
-                setMsgs(ms)
+    const sendMessage = (message) => {
+        messageService.sendMessage(user, otherUser, {message})
+            .then(() => {
+                // refresh messages
+                messageService.findAllMessagesBetweenUsers(user, otherUser)
+                    .then((ms) => {
+                        setMsgs(ms)
+                    })
+                    .catch(e => console.log(e));
             })
-            .catch(e => alert(e));
-
+            .catch(e => console.log(e));
 
     }
 
