@@ -4,13 +4,14 @@ import './chat.css';
 import * as service from "../../services/auth-service";
 
 import * as messageService from "../../services/messages-service";
-import * as userService from "../../services/users-service";
+import * as starredService from "../../services/starred-service";
 import { ChatMessage } from "./chat-message";
 
 export const ChatScreen = () => {
 
     const {state} = useLocation();
-    const [msgs, setMsgs] = useState(state.msg) 
+    const [msgs, setMsgs] = useState(state.msg)
+    const [strMsgs, setStrMsgs] = useState(state.stMs)
     const [user, setUsr] = useState(state.user)
     const [otherUser, setOtherUsr] = useState(state.otherUser)
     const [otherUsername, setOtherUsrname] = useState(state.otherUsername)
@@ -27,7 +28,7 @@ export const ChatScreen = () => {
     const navme = () => {
         navigate('/messages')
     }
-    
+
     const sendMessage = (message) => {
         messageService.sendMessage(user, otherUser, {message})
             .then(msg => {
@@ -53,8 +54,11 @@ export const ChatScreen = () => {
             <div className="mesgs border border-secondary rounded">
             
                 <div className="msg_history">
-                    {msgs && msgs.map(message =>
-                     <><ChatMessage key={message.id} message={message} loginUser = {user}/></> )}
+                    {msgs && msgs.map(message => {
+
+                        return (<><ChatMessage key={message.id} message={message} starred = {strMsgs} loginUser = {user}/></>)
+                    }
+                      )}
                 </div>
                 <div className="type_msg">
                     <div className="input_msg_write">
