@@ -1,6 +1,7 @@
 import {createUser, deleteUsersByUsername} from "../services/users-service";
 import {deleteMessage, sendMessage} from "../services/messages-service";
 import {userStarsMessage, userUnstarsMessage} from "../services/starred-service";
+import axios from "axios";
 
 describe('user can star a message', () => {
     let newMessage=null;
@@ -32,6 +33,7 @@ describe('user can star a message', () => {
 
     // setup test before running test
     beforeAll( () => {
+          axios.defaults.adapter = require('axios/lib/adapters/http')
          deleteUsersByUsername(testUser1.username);
          deleteUsersByUsername(testUser2.username);
     })
@@ -45,13 +47,15 @@ describe('user can star a message', () => {
     })
 
     test('user can star a message', async () => {
+        axios.defaults.adapter = require('axios/lib/adapters/http')
         // create new user with test user parameter
         const newUser1 = await createUser(testUser1);
         const newUser2 = await createUser(testUser2);
         // create new tuit using created user's identifier
         console.log("inside the test env");
-        console.log(" the new user 1 is "+testUser1);
+        console.log(" the new user 1 is "+newUser1.username);
         newMessage = await sendMessage(newUser1._id, newUser2._id, testMessage.message);
+        console.log(" user sends the message");
         const newStarredMessage= await userStarsMessage(newUser1._id, newMessage.message);
 
         // verify inserted tuit's properties match test tuit parameter
