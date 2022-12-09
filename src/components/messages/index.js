@@ -17,9 +17,9 @@ const Messages = () => {
       service.findLatestMessagesForUser(uid)
           .then(result => {
               for (let i = 0; i < result.length; i++) {
-                  result[i].user = result[i].from._id === loggedInUserId ? result[i].to : result[i].from;
+                  result[i].user = result[i].from._id === uid ? result[i].to : result[i].from;
               }
-              result.sort((a, b) => a.sentOn - b.sentOn);
+              result.sort((a, b) => new Date(b.sentOn) - new Date(a.sentOn));
               setMessages(result);
           });
 
