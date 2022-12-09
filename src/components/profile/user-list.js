@@ -1,23 +1,25 @@
 import React from "react";
 import {HashRouter, Link, Route, Routes, useNavigate, useLocation} from "react-router-dom";
 import * as service from "../../services/messages-service";
+import * as starredService from "../../services/starred-service";
 
 export const UserList = ({currUser,users}) => {
   const navigate = useNavigate()
   const goToMessages = (loggedInUser, otherUser, otherUsername) => {
-        
-    service.findAllMessagesBetweenUsers(loggedInUser, otherUser)
-        .then((ms) => {
-            navigate('/chat', {
-                state: {
-                  msg: ms,
-                  user: loggedInUser,
-                  otherUser: otherUser,
-                  otherUsername: otherUsername
-                }
-              })
-        })
-        .catch(e => alert(e));
+    starredService.findAllStarredMessagesByUser(loggedInUser)
+    .then(stMs => {service.findAllMessagesBetweenUsers(loggedInUser, otherUser)
+      .then((ms) => {
+          navigate('/chat', {
+              state: {
+                msg: ms,
+                user: loggedInUser,
+                otherUser: otherUser,
+                otherUsername: otherUsername,
+                stMs: stMs
+              }
+            })
+      })
+      .catch(e => alert(e));})
     
 }
   return (
