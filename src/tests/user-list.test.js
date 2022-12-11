@@ -30,6 +30,6 @@ test('user list renders async', async () => {
       <UserList users={users}/>
     </HashRouter>);
   // find element with specific text from test user
-  const linkElement = screen.getByText(/harrypotter/i);
+  const linkElement = screen.getByText(/@harrypotter/i);
   expect(linkElement).toBeInTheDocument();
 });
