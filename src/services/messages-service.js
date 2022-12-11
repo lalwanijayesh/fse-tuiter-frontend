@@ -14,19 +14,24 @@ export const findAllMessagesBetweenUsers = (uid, ruid) =>
         .then(response => response.data);
 
 export const sendMessage = (uid, ruid, msg) =>
-        axios.post(`${BASE_URL}/users/${uid}/messages/${ruid}`, msg)
-            .then(response => response.data);
+    axios.post(`${BASE_URL}/users/${uid}/messages/${ruid}`, msg)
+        .then(response => response.data);
 
 export const updateMessage = (uid, mid, msg) =>
-            axios.put(`${BASE_URL}/users/${uid}/messages/${mid}`, msg)
-                .then(response => response.data);
+    axios.put(`${BASE_URL}/users/${uid}/messages/${mid}`, msg)
+        .then(response => response.data);
+
+export const deleteMessage = (mid) =>
+    axios.delete(`${BASE_URL}/messages/${mid}`)
+        .then(response => response.data);
 
 const service = {
     findLatestMessagesForUser,
     findAllMessagesBetweenUsers,
     findAllMessagesSent,
     sendMessage,
-    updateMessage
+    updateMessage,
+    deleteMessage
 }
 
 export default service;

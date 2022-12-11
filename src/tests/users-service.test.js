@@ -3,6 +3,7 @@ import {
   deleteUsersByUsername, findAllUsers,
   findUserById
 } from "../services/users-service";
+import axios from "axios";
 
 describe('createUser', () => {
   // sample user to insert
@@ -38,6 +39,7 @@ describe('createUser', () => {
 describe('deleteUsersByUsername', () => {
 
   // sample user to delete
+  axios.defaults.adapter = require('axios/lib/adapters/http')
   const sowell = {
     username: 'thommas_sowell',
     password: 'compromise',
