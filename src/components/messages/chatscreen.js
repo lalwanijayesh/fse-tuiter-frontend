@@ -56,7 +56,7 @@ export const ChatScreen = () => {
                 <div className="msg_history">
                     {msgs && msgs.map(message => {
 
-                        return (<><ChatMessage key={message.id} message={message} starred = {strMsgs} loginUser = {user}/></>)
+                        return (<ChatMessage key={message._id} message={message} starred = {strMsgs} loginUser = {user}/>)
                     }
                       )}
                 </div>
