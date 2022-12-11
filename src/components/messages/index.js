@@ -53,7 +53,7 @@ const Messages = () => {
           <div className="list-group pe-4">
               {
                   messages && messages.map(message =>
-                      <Message key={message.id} message={message}/>)
+                      <Message key={message._id} message={message}/>)
               }
           </div>
       </div>
