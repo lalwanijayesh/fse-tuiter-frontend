@@ -17,7 +17,7 @@ test('user list renders static user array', () => {
       <UserList users={MOCKED_USERS}/>
     </HashRouter>);
   // find element with specific text from mock user data
-  const linkElement = screen.getByText(/ellen_ripley/i);
+  const linkElement = screen.getByText(/@ellen_ripley/i);
   expect(linkElement).toBeInTheDocument();
 });
 
@@ -35,6 +35,6 @@ test('user list renders mocked', async () => {
     </HashRouter>);
 
   // find element with specific text from mock user data
-  const user = screen.getByText(/ellen_ripley/i);
+  const user = screen.getByText(/@ellen_ripley/i);
   expect(user).toBeInTheDocument();
 });
