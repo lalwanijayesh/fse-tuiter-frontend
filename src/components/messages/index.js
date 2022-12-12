@@ -21,7 +21,8 @@ const Messages = () => {
               }
               result.sort((a, b) => new Date(b.sentOn) - new Date(a.sentOn));
               setMessages(result);
-          });
+          })
+          .catch(e => navigate('/login'));
 
   const getLoggedInUser = () => {
       const userId = sessionStorage.getItem('userId');
@@ -29,6 +30,7 @@ const Messages = () => {
           setLoggedInUserId(userId);
           getLatestMessages(userId);
       } else {
+          alert('You need to login!')
           navigate('/login');
       }
   }

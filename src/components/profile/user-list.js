@@ -5,6 +5,11 @@ import * as starredService from "../../services/starred-service";
 
 export const UserList = ({currUser,users}) => {
   const navigate = useNavigate()
+
+  const replaceImage = (error) => {
+    //replacement of broken Image
+    error.target.src = "https://media.geeksforgeeks.org/wp-content/uploads/20220608214422/galaryImage8.png"
+}
   const goToMessages = (loggedInUser, otherUser, otherUsername) => {
     starredService.findAllStarredMessagesByUser(loggedInUser)
     .then(stMs => {service.findAllMessagesBetweenUsers(loggedInUser, otherUser)
@@ -33,6 +38,7 @@ export const UserList = ({currUser,users}) => {
               } className="list-group-item ttr-message d-flex">
 
                   <img src={`../images/${user.username}.jpg`}
+                        onError= {(e) => replaceImage(e)}
                        className="ttr-user-avatar-logo rounded-circle"/>
                   <div className="mx-2">
                     <h5 className="m-1">{user.username}</h5>

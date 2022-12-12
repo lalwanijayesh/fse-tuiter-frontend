@@ -13,6 +13,7 @@ const Profile = () => {
     async function fetchProfile() {
         try {
             const user = await service.profile();
+            console.log(user._id)
             setProfile(user);
         } catch (e) {
             navigate('/login');
@@ -22,7 +23,11 @@ const Profile = () => {
   }, [navigate]);
   const logout = () => {
     service.logout()
-        .then(() => navigate('/login'));
+        .then(() => {
+            sessionStorage.removeItem('userId');
+            sessionStorage.removeItem('username');
+            navigate('/login')
+        });
   }
   return (
       <div className="ttr-profile">

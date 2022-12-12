@@ -11,6 +11,12 @@ const Message = ({message}) => {
       return new Date(dateString).toLocaleDateString(undefined, options)
     }
 
+    // replace image function
+   const replaceImage = (error) => {
+      //replacement of broken Image
+      error.target.src = "https://media.geeksforgeeks.org/wp-content/uploads/20220608214422/galaryImage8.png"
+  }
+
     const goToMessages = (otherUser, otherUsername) => {
         const loggedInUser = sessionStorage.getItem('userId');
         starredService.findAllStarredMessagesByUser(loggedInUser)
@@ -36,6 +42,7 @@ const Message = ({message}) => {
         <div className="list-group-item ttr-message d-flex" onClick={() => goToMessages(message.user._id, message.user.username)}>
           
           <img src={`../images/${message.user.username}.jpg`}
+                onError={(e) => replaceImage(e)}
                className="ttr-user-avatar-logo rounded-circle"/>
           <div className="mx-2">
               <h5>{message.user.username}@{message.user.username}</h5>
