@@ -19,6 +19,15 @@ This is a project worked towards completion of the Graduate Course - CS5500 - Fo
 - User can lookup starred messages and remove them from list
 - Incorporated login, signup and session mangement in the tuiter app
 
+## add .env file to the project
+please a .env file in the project directory.
+It should contain the following:
+This will allow ui-services to be connected the backend url we specify.
+
+```
+REACT_APP_BASE_URL=http://localhost:4000
+```
+
 
 ## how to start application
 Open command line in the project directory
@@ -27,7 +36,6 @@ Install node packages, you can run
 ```sh
 npm install
 ```
-
 
 deploy application locally, you can run:
 
