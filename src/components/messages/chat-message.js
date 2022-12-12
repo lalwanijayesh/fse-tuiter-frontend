@@ -45,6 +45,11 @@ export const ChatMessage = ({message, loginUser, starred}) => {
     }
 
     const isLoggedInUser = loginUser == message.from._id;
+
+    const replaceImage = (error) => {
+        //replacement of broken Image
+        error.target.src = "https://media.geeksforgeeks.org/wp-content/uploads/20220608214422/galaryImage8.png"
+    }
       
     return (
         
@@ -52,7 +57,10 @@ export const ChatMessage = ({message, loginUser, starred}) => {
             {!isLoggedInUser && 
                 <div className="incoming_msg">
                             <div className="incoming_msg_img "> 
-                                <img className="rounded-circle" src={`../images/${message.from.username}.jpg`} alt="sunil"/> 
+                                <img className="rounded-circle" 
+                                src={`../images/${message.from.username}.jpg`} 
+                                onError= {(e) => replaceImage(e)}
+                                alt="sunil"/> 
                             </div>
                             <div className="received_msg">
                                 <div className="received_withd_msg" onMouseEnter={() => setIsShown(true)} onMouseLeave={() => setIsShown(false)}>
